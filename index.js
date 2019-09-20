@@ -11,8 +11,8 @@ module.exports = function alibarray() {
      */
   var move = function (arr, fromIndex, toIndex) {
     var item = arr[fromIndex];
-    arr.splice(toIndex, 0, item);
     arr.splice(fromIndex, 1);
+    arr.splice(toIndex, 0, item);
   }
 
   /**
@@ -32,10 +32,25 @@ module.exports = function alibarray() {
      * @return {boolean}  - true if array contains 
      */
   var contains = function (arr, compareItem) {
-    var match = false;
+    if (position(arr, compareItem) !== null) {
+      return true;
+    }
+    else {
+      return false;
+    }
+  }
+
+  /**
+     * returns position of first item in array containing an object with props and values matching that of passed compareObject - if nothing is found, null is returned 
+     * @param {array} arr - array for operation to be executed on
+     * @param {object} compareItem - item to compare
+     * @return {boolean}  - true if array contains 
+     */  
+  var position = function (arr, compareItem) {
+    var pos = null;
 
     //first enumerate obj props and values
-    if (typeof(compareItem) === 'object') {
+    if (typeof (compareItem) === 'object') {
       var keys = [];
       var values = [];
       for (var prop in compareItem) {
@@ -57,7 +72,7 @@ module.exports = function alibarray() {
         }
 
         if (matches === keys.length) {
-          match = true;
+          pos = i;
           break;
         }
       }
@@ -66,13 +81,13 @@ module.exports = function alibarray() {
       //compare primative
       for (var i = 0; i < arr.length; i++) {
         if (arr[i] === compareItem) {
-          match = true;
+          pos = i;
           break;
         }
       }
     }
 
-    return match;
+    return pos;
   }
 
   return {
