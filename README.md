@@ -71,7 +71,7 @@ insert - inserts an item into an array, if index value is bigger than length of 
 ```js
 
 var data = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
-alibarray().insert(data4, 99, 4);
+alibarray().insert(data, 99, 4);
 
 console.log(data);
 //=> [0, 1, 2, 3, 99, 4, 5, 6, 7, 8, 9, 10];
