@@ -54,6 +54,34 @@ var result = alibarray().contains(data, 99);
 
 ```
 
+position - returns position of first item in array containing an object with props and values matching that of passed compareObject - if nothing is found, null is returned :
+
+```js
+
+const alibarray = require('alib-array');
+
+var data = [
+    { color: 'blue', size: 44 },
+    { color: 'green', size: 12 },
+    { color: 'red', size: 18 },
+    { color: 'blue', size: 9 },
+    { color: 'blue', size: 4 },
+    { color: 'blue', size: 12 },
+    { color: 'black', size: 12 },
+];
+
+var result = alibarray().position(data, { color: 'green', size: 12 });
+//=> 1 - item at index position 1
+
+var result = alibarray().position(data, { color: 'green' });
+//=> 1 - item at index position 1
+
+
+var result = alibarray().position(data, { color: 'green', size: 12, details : {shape: 'round', name: 'circle'} });
+//=> null - return null as item is not in the array
+
+```
+
 move - moves an item in an array, mutates the array passed to it
 
 ```js

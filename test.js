@@ -107,7 +107,7 @@ describe('alibarray', function () {
             assert.equal(result, 0);
         });       
         
-        it('should return null as item is contained in the array', function () {
+        it('should return null as item is not contained in the array', function () {
             var result = alibarray().position(data, { color: 'green', size: 12, details : {shape: 'round', name: 'circle'} });
             assert.equal(result, null);
         });        
