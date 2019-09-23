@@ -13,7 +13,21 @@ module.exports = function alibarray() {
     var item = arr[fromIndex];
     arr.splice(fromIndex, 1);
     arr.splice(toIndex, 0, item);
-  }
+  };
+
+  /**
+     * swaps the position of 2 items in an array, mutates the array passed to it
+     * @param {array} arr - array for operation to be executed on
+     * @param {int} indexA - index of item A to swap
+     * @param {int} toIndex - index of item B to swap
+     */
+    var swap = function (arr, indexA, indexB) {
+      if (indexA < arr.length && indexB < arr.length) {
+        var temp = arr[indexA];
+        arr[indexA] = arr[indexB];
+        arr[indexB] = temp;
+      }
+    };  
 
   /**
      * inserts an item into an array, mutates the array passed to it
@@ -22,8 +36,8 @@ module.exports = function alibarray() {
      * @param {int} index - position in array to insert item - if value is bigger than length of array, item will be placed at the end
      */
   var insert = function (arr, item, index) {
-    arr.splice(index, 0, item)
-  }
+    arr.splice(index, 0, item);
+  };
 
   /**
      * checks if an array contains an object with props and values matching that of passed compareObject 
@@ -38,7 +52,7 @@ module.exports = function alibarray() {
     else {
       return false;
     }
-  }
+  };
 
   /**
      * returns position of first item in array containing an object with props and values matching that of passed compareObject - if nothing is found, null is returned 
@@ -88,11 +102,13 @@ module.exports = function alibarray() {
     }
 
     return pos;
-  }
+  };
 
   return {
     move: move,
+    swap: swap,
     insert: insert,
-    contains: contains
+    contains: contains,
+    position: position
   };
 };
