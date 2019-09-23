@@ -1,10 +1,10 @@
 # alib-array
 
-A set of JavaScript array helper functions - 
-position - returns index position of first item in array containing an object with props and values matching that of passed object
-contains - Check if array contains object with props and values matching that of passed object
-move - moves an item in array
-swap - swaps 2 items position in an array
+A set of JavaScript array helper functions position, contains, move, swap.
+* position - returns index position of first item in array containing an object with props and values matching that of passed object.
+* contains - Check if array contains object with props and values matching that of passed object.
+* move - moves an item in array.
+* swap - swaps 2 items position in an array.
 
 ## Install
 
