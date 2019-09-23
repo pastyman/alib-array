@@ -92,17 +92,17 @@ describe('alibarray', function () {
     });
     
     describe('#position()', function () {
-        it('should return 1 as item is at pos 1 in the array', function () {
+        it('should return 1 as item is at index pos 1 in the array', function () {
             var result = alibarray().position(data, { color: 'green', size: 12 });
             assert.equal(result, 1);
         });
 
-        it('should return 1 as item is at pos 1 in the array', function () {
+        it('should return 1 as item is at index pos 1 in the array', function () {
             var result = alibarray().position(data, { color: 'green' });
             assert.equal(result, 1);
         });    
         
-        it('should return 0 as item is at pos 0 in the array', function () {
+        it('should return 0 as item is at index pos 0 in the array', function () {
             var result = alibarray().position(data, { });
             assert.equal(result, 0);
         });       
@@ -132,7 +132,7 @@ describe('alibarray', function () {
             assert.equal(result, null);
         });   
         
-        it('should return 6 as primative is at pos 6 in the array', function () {
+        it('should return 6 as primative is at index pos 6 in the array', function () {
             var result = alibarray().position(data2, 7);
             assert.equal(result, 6);
         }); 
@@ -144,7 +144,7 @@ describe('alibarray', function () {
     });
 
     describe('#insert()', function () {
-        it('should insert item at position 3', function () {
+        it('should insert item at index position 3', function () {
             alibarray().insert(data, { color: 'gold', size: 15 }, 3);
             assert.deepEqual(data, datat1);
         });
