@@ -1,7 +1,7 @@
 {
   "name": "alib-array",
-  "version": "1.2.2",
-  "description": "A set of array helper functions",
+  "version": "1.2.3",
+  "description": "A set of JavaScript array helper functions \nposition - returns index position of first item in array containing an object with props and values matching that of passed object.\ncontains - Check if array contains object with props and values matching that of passed object.\nmove - moves an item in array.\n swap - swaps 2 items position in an array.",
   "main": "index.js",
   "scripts": {
     "test": "mocha"
