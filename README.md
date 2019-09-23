@@ -105,3 +105,15 @@ console.log(data);
 //=> [0, 1, 2, 3, 99, 4, 5, 6, 7, 8, 9, 10];
 
 ```
+
+swap - swaps the position of 2 items in an array, mutates the array passed to it
+
+```js
+
+var data = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+alibarray().swap(data, 4, 8);
+
+console.log(data);
+//=> [0, 1, 2, 3, 8, 5, 6, 7, 4, 9, 10];
+
+```
