@@ -34,6 +34,9 @@ module.exports = function alibarray() {
      * @param {array} arr - array for operation to be executed on
      * @param {object/string/int} item - item to insert
      * @param {int} index - position in array to insert item - if value is bigger than length of array, item will be placed at the end
+     * @example 
+     * // mutates array data to insert: { color: 'gold', size: 15 } at index 3 
+     * alibarray().insert(data, { color: 'gold', size: 15 }, 3);
      */
   var insert = function (arr, item, index) {
     arr.splice(index, 0, item);
