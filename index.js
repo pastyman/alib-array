@@ -47,6 +47,9 @@ module.exports = function alibarray() {
      * @param {array} arr - array for operation to be executed on
      * @param {object} compareItem - item to compare
      * @return {boolean}  - true if array contains 
+     * @example 
+     * // check if array data contains object like: { color: 'green', size: 12 }
+     * var result = alibarray().contains(data, { color: 'green', size: 12 });
      */
   var contains = function (arr, compareItem) {
     if (position(arr, compareItem) !== null) {
