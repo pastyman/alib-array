@@ -65,7 +65,10 @@ module.exports = function alibarray() {
      * @param {array} arr - array for operation to be executed on
      * @param {object} compareItem - item to compare
      * @return {boolean}  - true if array contains 
-     */  
+     * @example 
+     * // should return 1 as item is at index pos 1 in the array
+     * var result = alibarray().position(data, { color: 'green', size: 12 });
+     */ 
   var position = function (arr, compareItem) {
     var pos = null;
 
