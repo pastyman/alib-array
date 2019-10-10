@@ -1,6 +1,6 @@
 {
   "name": "alib-array",
-  "version": "1.2.7",
+  "version": "1.3.7",
   "description": "A set of JavaScript array helper functions: position, contains, move, swap.",
   "main": "index.js",
   "scripts": {
@@ -18,9 +18,11 @@
     "array",
     "contains",
     "positon",
+    "count",
     "move",
     "insert",
     "swap",
+    "object",
     "fast",
     "alib"
   ],

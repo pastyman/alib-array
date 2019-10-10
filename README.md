@@ -49,6 +49,8 @@ contains can also check for primitives:
 
 ```js
 
+const alibarray = require('alib-array');
+
 var data = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
 var result = alibarray().contains(data, 7);
@@ -84,6 +86,34 @@ var result = alibarray().position(data, { color: 'green' });
 
 var result = alibarray().position(data, { color: 'green', size: 12, details : {shape: 'round', name: 'circle'} });
 //=> null - return null as item is not in the array
+
+```
+
+count - returns number of items in array containing an object with props and values matching that of passed compareItem:
+
+```js
+
+const alibarray = require('alib-array');
+
+var data = [
+    { color: 'blue', size: 44 },
+    { color: 'green', size: 12 },
+    { color: 'red', size: 18 },
+    { color: 'blue', size: 9 },
+    { color: 'blue', size: 4 },
+    { color: 'blue', size: 12 },
+    { color: 'black', size: 12 },
+];
+
+var result = alibarray().count(data, { color: 'green', size: 12 });
+//=> 1 - 1 items match
+
+var result = alibarray().count(data, { color: 'blue' });
+//=> 4 - 4 items match
+
+
+var result = alibarray().count(data, { color: 'green', size: 12, details : {shape: 'round', name: 'circle'} });
+//=> 0 - 0 items match
 
 ```
 

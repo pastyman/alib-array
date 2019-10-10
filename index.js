@@ -21,13 +21,13 @@ module.exports = function alibarray() {
      * @param {int} indexA - index of item A to swap
      * @param {int} toIndex - index of item B to swap
      */
-    var swap = function (arr, indexA, indexB) {
-      if (indexA < arr.length && indexB < arr.length) {
-        var temp = arr[indexA];
-        arr[indexA] = arr[indexB];
-        arr[indexB] = temp;
-      }
-    };  
+  var swap = function (arr, indexA, indexB) {
+    if (indexA < arr.length && indexB < arr.length) {
+      var temp = arr[indexA];
+      arr[indexA] = arr[indexB];
+      arr[indexB] = temp;
+    }
+  };
 
   /**
      * inserts an item into an array, mutates the array passed to it
@@ -43,7 +43,7 @@ module.exports = function alibarray() {
   };
 
   /**
-     * checks if an array contains an object with props and values matching that of passed compareObject 
+     * checks if an array contains an object with props and values matching that of passed compareItem 
      * @param {array} arr - array for operation to be executed on
      * @param {object} compareItem - item to compare
      * @return {boolean}  - true if array contains 
@@ -61,14 +61,14 @@ module.exports = function alibarray() {
   };
 
   /**
-     * returns position of first item in array containing an object with props and values matching that of passed compareObject - if nothing is found, null is returned 
+     * returns position of first item in array containing an object with props and values matching that of passed compareItem - if nothing is found, null is returned 
      * @param {array} arr - array for operation to be executed on
      * @param {object} compareItem - item to compare
      * @return {boolean}  - true if array contains 
      * @example 
      * // should return 1 as item is at index pos 1 in the array
      * var result = alibarray().position(data, { color: 'green', size: 12 });
-     */ 
+     */
   var position = function (arr, compareItem) {
     var pos = null;
 
@@ -113,11 +113,63 @@ module.exports = function alibarray() {
     return pos;
   };
 
+  /**
+   * returns number of items in array containing an object with props and values matching that of passed compareItem 
+   * @param {array} arr - array for operation to be executed on
+   * @param {object} compareItem - item to compare
+   * @return {int}  - number of matching items 
+   * @example 
+   * // should return 3 as there are 3 items matching compareItem in the array
+   * var result = alibarray().count(data, { color: 'green'});
+   */
+  var count = function (arr, compareItem) {
+    var countMatches = 0;
+
+    //first enumerate obj props and values
+    if (typeof (compareItem) === 'object') {
+      var keys = [];
+      var values = [];
+      for (var prop in compareItem) {
+        if (compareItem.hasOwnProperty(prop)) {
+          //The current property is a direct property
+          keys.push(prop);
+          values.push(compareItem[prop]);
+        }
+      }
+
+      //iterate through and match
+      for (var i = 0; i < arr.length; i++) {
+        var matches = 0;
+        for (var j = 0; j < keys.length; j++) {
+          if (arr[i][keys[j]] === values[j]) {
+            //inc matches
+            matches++;
+          }
+        }
+
+        if (matches === keys.length) {
+          countMatches++;
+        }
+      }
+    }
+    else {
+      //compare primative
+      for (var i = 0; i < arr.length; i++) {
+        if (arr[i] === compareItem) {
+          countMatches++;
+        }
+      }
+    }
+
+    return countMatches;
+  };
+
   return {
     move: move,
     swap: swap,
     insert: insert,
     contains: contains,
-    position: position
+    position: position,
+    count: count
   };
 };

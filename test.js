@@ -143,6 +143,28 @@ describe('alibarray', function () {
         });   
     });
 
+    describe('#count()', function () {
+        it('should return 1 as 1 item matches in the array', function () {
+            var result = alibarray().count(data, { color: 'green', size: 12 });
+            assert.equal(result, 1);
+        });
+
+        it('should return 4 as 4 item matches in the array', function () {
+            var result = alibarray().count(data, { color: 'blue' });
+            assert.equal(result, 4);
+        });    
+
+        it('should return 3 as 3 item matches in the array', function () {
+            var result = alibarray().count(data, { size: 12 });
+            assert.equal(result, 3);
+        }); 
+        
+        it('should return 0 as 0 item matches in the array', function () {
+            var result = alibarray().count(data, { color: 'green', size: 55 });
+            assert.equal(result, 0);
+        });        
+    });
+
     describe('#insert()', function () {
         it('should insert item at index position 3', function () {
             alibarray().insert(data, { color: 'gold', size: 15 }, 3);
