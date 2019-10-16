@@ -1,6 +1,6 @@
 # alib-array
 
-A set of JavaScript array helper functions: position, contains, move, swap.
+A set of JavaScript array helper functions: position, contains, count, move, swap.
 * position - returns index position of first item in array containing an object with props and values matching that of passed object.
 * contains - Check if array contains object with props and values matching that of passed object.
 * count - returns number of items in array containing an object with props and values matching that of passed object.
@@ -44,6 +44,11 @@ var result = alibarray().contains(data, { color: 'green', size: 25 });
 var result = alibarray().contains(data, { color: 'green' });
 //=> true - although not an exact match, the array contains an object with prop color equal to green
 
+//compareMode can be passed defaults to all - compare mode 'all' matches all props on passed object 'any' any props match from passed object, 'exact' - exact match 
+
+var result = alibarray().contains(data, { color: 'green' }, 'exact');
+//=> false - an exact match of { color: 'green' } not found in the array
+
 ```
 
 contains can also check for primitives:
@@ -84,6 +89,10 @@ var result = alibarray().position(data, { color: 'green', size: 12 });
 var result = alibarray().position(data, { color: 'green' });
 //=> 1 - item at index position 1
 
+//compareMode can be passed defaults to all - compare mode 'all' matches all props on passed object 'any' any props match from passed object, 'exact' - exact match 
+
+var result = alibarray().position(data, { color: 'green' }, 'exact');
+//=> null - an exact match of { color: 'green' } not found in the array
 
 var result = alibarray().position(data, { color: 'green', size: 12, details : {shape: 'round', name: 'circle'} });
 //=> null - return null as item is not in the array

@@ -55,7 +55,7 @@ describe('alibarray', function () {
             assert.equal(result, true);
         });       
         
-        it('should return false as item is contained in the array', function () {
+        it('should return false as item is not contained in the array', function () {
             var result = alibarray().contains(data, { color: 'green', size: 12, details : {shape: 'round', name: 'circle'} });
             assert.equal(result, false);
         });        
@@ -75,6 +75,16 @@ describe('alibarray', function () {
             assert.equal(result, false);
         });  
         
+        it('should return false as exact item is not contained in the array', function () {
+            var result = alibarray().contains(data, { color: 'green' }, 'exact');
+            assert.equal(result, false);
+        }); 
+
+        it('should return true as one item with matching prop contained in the array', function () {
+            var result = alibarray().contains(data, { color: 'green', size: 12, details : {shape: 'round', name: 'circle'} }, 'any');
+            assert.equal(result, true);
+        });        
+
         it('should return false as primative is not contained in the array', function () {
             var result = alibarray().contains(data, 7);
             assert.equal(result, false);
@@ -89,6 +99,9 @@ describe('alibarray', function () {
             var result = alibarray().contains(data2, 41);
             assert.equal(result, false);
         });   
+
+
+
     });
     
     describe('#position()', function () {

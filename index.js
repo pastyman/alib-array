@@ -46,13 +46,14 @@ module.exports = function alibarray() {
      * checks if an array contains an object with props and values matching that of passed compareItem 
      * @param {array} arr - array for operation to be executed on
      * @param {object} compareItem - item to compare
-     * @return {boolean}  - true if array contains 
+     * @param {string} [compareMode="all"] - compare mode 'all' matches all props on passed object 'any' any props match, 'exact' - exact match
+     * @return {boolean}  - true if array contains item match
      * @example 
      * // check if array data contains object like: { color: 'green', size: 12 }
      * var result = alibarray().contains(data, { color: 'green', size: 12 });
      */
-  var contains = function (arr, compareItem) {
-    if (position(arr, compareItem) !== null) {
+  var contains = function (arr, compareItem, compareMode) {
+    if (position(arr, compareItem, compareMode) !== null) {
       return true;
     }
     else {
@@ -64,13 +65,20 @@ module.exports = function alibarray() {
      * returns position of first item in array containing an object with props and values matching that of passed compareItem - if nothing is found, null is returned 
      * @param {array} arr - array for operation to be executed on
      * @param {object} compareItem - item to compare
-     * @return {boolean}  - true if array contains 
+     * @param {string} [compareMode="all"] - compare mode 'all' matches all props on passed object 'any' any props match, 'exact' - exact match
+     * @return {int}  - positon if array contains item, otherwise null 
      * @example 
      * // should return 1 as item is at index pos 1 in the array
      * var result = alibarray().position(data, { color: 'green', size: 12 });
      */
-  var position = function (arr, compareItem) {
+  var position = function (arr, compareItem, compareMode) {
     var pos = null;
+
+    //normalise compare mode
+    var nCompareMode = 'all';
+    if (compareMode && (compareMode === 'any' || compareMode === 'exact')) {
+      nCompareMode = compareMode;
+    }
 
     //first enumerate obj props and values
     if (typeof (compareItem) === 'object') {
@@ -94,9 +102,27 @@ module.exports = function alibarray() {
           }
         }
 
-        if (matches === keys.length) {
+        if (nCompareMode === 'all' && matches === keys.length) {
           pos = i;
           break;
+        }
+        if (nCompareMode === 'any' && matches > 0) {
+          pos = i;
+          break;
+        }
+        if (nCompareMode === 'exact' && matches === keys.length) {
+          //now check prop count
+          var pcount = 0;
+          for (var prop in arr[i]) {
+            if (arr[i].hasOwnProperty(prop)) {
+              pcount++;
+            }
+          }
+
+          if (pcount === keys.length) {
+            pos = i;
+            break;
+          }
         }
       }
     }
