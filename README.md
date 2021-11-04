@@ -19,11 +19,21 @@ $ npm i alib-array --save
 
 ## Usage
 
-contains - checks if an array contains an object with props and values matching that of passed compareObject:
+import or require:
 
 ```js
 
 const alibarray = require('alib-array');
+
+//or
+
+import alibarray from 'alib-array';
+
+```
+
+contains - checks if an array contains an object with props and values matching that of passed compareObject:
+
+```js
 
 var data = [
     { color: 'blue', size: 44 },
@@ -55,8 +65,6 @@ contains can also check for primitives:
 
 ```js
 
-const alibarray = require('alib-array');
-
 var data = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
 var result = alibarray().contains(data, 7);
@@ -70,8 +78,6 @@ var result = alibarray().contains(data, 99);
 position - returns position of first item in array containing an object with props and values matching that of passed compareObject - if nothing is found, null is returned :
 
 ```js
-
-const alibarray = require('alib-array');
 
 var data = [
     { color: 'blue', size: 44 },
@@ -102,8 +108,6 @@ var result = alibarray().position(data, { color: 'green', size: 12, details : {s
 count - returns number of items in array containing an object with props and values matching that of passed compareItem:
 
 ```js
-
-const alibarray = require('alib-array');
 
 var data = [
     { color: 'blue', size: 44 },
