@@ -6,6 +6,9 @@ A set of JavaScript array helper functions: position, contains, count, move, swa
 * count - returns number of items in array containing an object with props and values matching that of passed object.
 * move - moves an item in array.
 * swap - swaps 2 items position in an array.
+* first - get first item of array, returns undefined if array empty.
+* last - get last item of array, returns undefined if array empty.
+* unique - returns items where prop of propName has a unique value.
 
 ## Install
 
@@ -188,5 +191,25 @@ var result = alibarray().last(data);
 
 console.log(result);
 //=> 10
+
+```
+
+unique - returns items where prop of propName has a unique value.
+
+```js
+
+var data = [
+  { color: 'blue', size: 44 },
+  { color: 'green', size: 12 },
+  { color: 'red', size: 18 },
+  { color: 'gold', size: 15 },
+  { color: 'blue', size: 9 },
+  { color: 'blue', size: 4 },
+  { color: 'blue', size: 12 },
+  { color: 'black', size: 12 },
+];
+
+var result = alibarray().unique(data, 'color');
+//=> [{ color: 'blue', size: 44 }, { color: 'green', size: 12 }, { color: 'red', size: 18 }, { color: 'gold', size: 15 }, { color: 'black', size: 12 }] only items with unique value for prop color are returned
 
 ```

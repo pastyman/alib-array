@@ -38,7 +38,7 @@ const alibarray = () => {
      * // mutates array data to insert: { color: 'gold', size: 15 } at index 3 
      * alibarray().insert(data, { color: 'gold', size: 15 }, 3);
      */
-   const insert = (arr, item, index) => {
+  const insert = (arr, item, index) => {
     arr.splice(index, 0, item);
   };
 
@@ -197,8 +197,8 @@ const alibarray = () => {
      * // should return { color: 'black', size: 12 } as this is last item in array
      * let result = alibarray().last(data);
      */
-   const last = (arr) => {
-    return arr.length > 0 ? arr[arr.length -1] : undefined;
+  const last = (arr) => {
+    return arr.length > 0 ? arr[arr.length - 1] : undefined;
   };
 
   /**
@@ -208,9 +208,21 @@ const alibarray = () => {
      * // should return { color: 'blue', size: 44 } as this is first item in array
      * let result = alibarray().first(data);
      */
-   const first = (arr) => {
+  const first = (arr) => {
     return arr.length > 0 ? arr[0] : undefined;
-  };  
+  };
+
+  /**
+     * returns items where prop of propName has a unique value
+     * @param {array} arr - array for operation to be executed on
+     * @param {string} propName - name of prop to do compare on
+     * @example 
+     * // should return [{ color: 'blue', size: 44 }, { color: 'green', size: 12 }, { color: 'red', size: 18 }, { color: 'gold', size: 15 }, { color: 'black', size: 12 }] as these are the first found unique value of 'color' for all objects in passed array
+     * let result = alibarray().unique(data, 'color');
+     */
+  const unique = (arr, propName) => {
+    return arr.filter((item, pos, self) => self.findIndex(v => v[propName] === item[propName]) === pos)
+  };
 
 
   return {
@@ -221,7 +233,8 @@ const alibarray = () => {
     position,
     count,
     last,
-    first
+    first,
+    unique
   };
 };
 
