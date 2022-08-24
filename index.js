@@ -1,7 +1,7 @@
 "use strict";
 
 //a set of array helper functions
-module.exports = function alibarray() {
+const alibarray = () => {
 
   /**
      * moves an item in an array, mutates the array passed to it
@@ -9,7 +9,7 @@ module.exports = function alibarray() {
      * @param {int} fromIndex - index of item to move
      * @param {int} toIndex - position in array to move item to - if value is bigger than length of array, item will be placed at the end
      */
-  var move = function (arr, fromIndex, toIndex) {
+  const move = (arr, fromIndex, toIndex) => {
     var item = arr[fromIndex];
     arr.splice(fromIndex, 1);
     arr.splice(toIndex, 0, item);
@@ -21,7 +21,7 @@ module.exports = function alibarray() {
      * @param {int} indexA - index of item A to swap
      * @param {int} toIndex - index of item B to swap
      */
-  var swap = function (arr, indexA, indexB) {
+  const swap = (arr, indexA, indexB) => {
     if (indexA < arr.length && indexB < arr.length) {
       var temp = arr[indexA];
       arr[indexA] = arr[indexB];
@@ -38,7 +38,7 @@ module.exports = function alibarray() {
      * // mutates array data to insert: { color: 'gold', size: 15 } at index 3 
      * alibarray().insert(data, { color: 'gold', size: 15 }, 3);
      */
-  var insert = function (arr, item, index) {
+   const insert = (arr, item, index) => {
     arr.splice(index, 0, item);
   };
 
@@ -52,7 +52,7 @@ module.exports = function alibarray() {
      * // check if array data contains object like: { color: 'green', size: 12 }
      * var result = alibarray().contains(data, { color: 'green', size: 12 });
      */
-  var contains = function (arr, compareItem, compareMode) {
+  const contains = (arr, compareItem, compareMode) => {
     if (position(arr, compareItem, compareMode) !== null) {
       return true;
     }
@@ -71,7 +71,7 @@ module.exports = function alibarray() {
      * // should return 1 as item is at index pos 1 in the array
      * var result = alibarray().position(data, { color: 'green', size: 12 });
      */
-  var position = function (arr, compareItem, compareMode) {
+  const position = (arr, compareItem, compareMode) => {
     var pos = null;
 
     //normalise compare mode
@@ -148,7 +148,7 @@ module.exports = function alibarray() {
    * // should return 3 as there are 3 items matching compareItem in the array
    * var result = alibarray().count(data, { color: 'green'});
    */
-  var count = function (arr, compareItem) {
+  const count = (arr, compareItem) => {
     var countMatches = 0;
 
     //first enumerate obj props and values
@@ -191,11 +191,14 @@ module.exports = function alibarray() {
   };
 
   return {
-    move: move,
-    swap: swap,
-    insert: insert,
-    contains: contains,
-    position: position,
-    count: count
+    move,
+    swap,
+    insert,
+    contains,
+    position,
+    count
   };
 };
+
+
+module.exports = alibarray;
