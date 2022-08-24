@@ -139,7 +139,7 @@ var data = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 alibarray().move(data, 4, 8);
 
 console.log(data);
-//=> [0, 1, 2, 3, 5, 6, 7, 8, 4, 9, 10];
+//=> [0, 1, 2, 3, 5, 6, 7, 8, 4, 9, 10]
 
 ```
 
@@ -151,7 +151,7 @@ var data = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 alibarray().insert(data, 99, 4);
 
 console.log(data);
-//=> [0, 1, 2, 3, 99, 4, 5, 6, 7, 8, 9, 10];
+//=> [0, 1, 2, 3, 99, 4, 5, 6, 7, 8, 9, 10]
 
 ```
 
@@ -163,6 +163,30 @@ var data = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 alibarray().swap(data, 4, 8);
 
 console.log(data);
-//=> [0, 1, 2, 3, 8, 5, 6, 7, 4, 9, 10];
+//=> [0, 1, 2, 3, 8, 5, 6, 7, 4, 9, 10]
+
+```
+
+first - returns first item in array. if the array is empty, undefined is returned
+
+```js
+
+var data = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+var result = alibarray().first(data);
+
+console.log(result);
+//=> 0
+
+```
+
+last - returns last item in array. if the array is empty, undefined is returned
+
+```js
+
+var data = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+var result = alibarray().last(data);
+
+console.log(result);
+//=> 10
 
 ```

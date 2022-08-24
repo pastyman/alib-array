@@ -26,6 +26,8 @@ var datat1 = [
     { color: 'blue', size: 12 },
     { color: 'black', size: 12 },
 ];
+var datat2 = { color: 'blue', size: 44 };
+var datat3 = { color: 'black', size: 12 };
 
 var data2 = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
@@ -203,6 +205,28 @@ describe('alibarray', function () {
         it('should swap items at index 4 and 8', function () {
             alibarray().swap(data5, 4, 8);
             assert.deepEqual(data5, data5t1);
+        });
+    });   
+
+    describe('#first()', function () {
+        it('should return first item in array', function () {
+            var result = alibarray().first(data);
+            assert.deepEqual(result, datat2);
+        });
+        it('should return undefined as array empty', function () {
+            var result = alibarray().first([]);
+            assert.deepEqual(result, undefined);
+        });
+    });     
+    
+    describe('#last()', function () {
+        it('should return last item in array', function () {
+            var result = alibarray().last(data);
+            assert.deepEqual(result, datat3);
+        });
+        it('should return undefined as array empty', function () {
+            var result = alibarray().last([]);
+            assert.deepEqual(result, undefined);
         });
     });      
 });

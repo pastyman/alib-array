@@ -10,7 +10,7 @@ const alibarray = () => {
      * @param {int} toIndex - position in array to move item to - if value is bigger than length of array, item will be placed at the end
      */
   const move = (arr, fromIndex, toIndex) => {
-    var item = arr[fromIndex];
+    let item = arr[fromIndex];
     arr.splice(fromIndex, 1);
     arr.splice(toIndex, 0, item);
   };
@@ -23,7 +23,7 @@ const alibarray = () => {
      */
   const swap = (arr, indexA, indexB) => {
     if (indexA < arr.length && indexB < arr.length) {
-      var temp = arr[indexA];
+      let temp = arr[indexA];
       arr[indexA] = arr[indexB];
       arr[indexB] = temp;
     }
@@ -50,7 +50,7 @@ const alibarray = () => {
      * @return {boolean}  - true if array contains item match
      * @example 
      * // check if array data contains object like: { color: 'green', size: 12 }
-     * var result = alibarray().contains(data, { color: 'green', size: 12 });
+     * let result = alibarray().contains(data, { color: 'green', size: 12 });
      */
   const contains = (arr, compareItem, compareMode) => {
     if (position(arr, compareItem, compareMode) !== null) {
@@ -69,22 +69,22 @@ const alibarray = () => {
      * @return {int}  - positon if array contains item, otherwise null 
      * @example 
      * // should return 1 as item is at index pos 1 in the array
-     * var result = alibarray().position(data, { color: 'green', size: 12 });
+     * let result = alibarray().position(data, { color: 'green', size: 12 });
      */
   const position = (arr, compareItem, compareMode) => {
-    var pos = null;
+    let pos = null;
 
     //normalise compare mode
-    var nCompareMode = 'all';
+    let nCompareMode = 'all';
     if (compareMode && (compareMode === 'any' || compareMode === 'exact')) {
       nCompareMode = compareMode;
     }
 
     //first enumerate obj props and values
     if (typeof (compareItem) === 'object') {
-      var keys = [];
-      var values = [];
-      for (var prop in compareItem) {
+      let keys = [];
+      let values = [];
+      for (let prop in compareItem) {
         if (compareItem.hasOwnProperty(prop)) {
           //The current property is a direct property
           keys.push(prop);
@@ -93,9 +93,9 @@ const alibarray = () => {
       }
 
       //iterate through and match
-      for (var i = 0; i < arr.length; i++) {
-        var matches = 0;
-        for (var j = 0; j < keys.length; j++) {
+      for (let i = 0; i < arr.length; i++) {
+        let matches = 0;
+        for (let j = 0; j < keys.length; j++) {
           if (arr[i][keys[j]] === values[j]) {
             //inc matches
             matches++;
@@ -112,8 +112,8 @@ const alibarray = () => {
         }
         if (nCompareMode === 'exact' && matches === keys.length) {
           //now check prop count
-          var pcount = 0;
-          for (var prop in arr[i]) {
+          let pcount = 0;
+          for (let prop in arr[i]) {
             if (arr[i].hasOwnProperty(prop)) {
               pcount++;
             }
@@ -128,7 +128,7 @@ const alibarray = () => {
     }
     else {
       //compare primative
-      for (var i = 0; i < arr.length; i++) {
+      for (let i = 0; i < arr.length; i++) {
         if (arr[i] === compareItem) {
           pos = i;
           break;
@@ -146,16 +146,16 @@ const alibarray = () => {
    * @return {int}  - number of matching items 
    * @example 
    * // should return 3 as there are 3 items matching compareItem in the array
-   * var result = alibarray().count(data, { color: 'green'});
+   * let result = alibarray().count(data, { color: 'green'});
    */
   const count = (arr, compareItem) => {
-    var countMatches = 0;
+    let countMatches = 0;
 
     //first enumerate obj props and values
     if (typeof (compareItem) === 'object') {
-      var keys = [];
-      var values = [];
-      for (var prop in compareItem) {
+      let keys = [];
+      let values = [];
+      for (let prop in compareItem) {
         if (compareItem.hasOwnProperty(prop)) {
           //The current property is a direct property
           keys.push(prop);
@@ -164,9 +164,9 @@ const alibarray = () => {
       }
 
       //iterate through and match
-      for (var i = 0; i < arr.length; i++) {
-        var matches = 0;
-        for (var j = 0; j < keys.length; j++) {
+      for (let i = 0; i < arr.length; i++) {
+        let matches = 0;
+        for (let j = 0; j < keys.length; j++) {
           if (arr[i][keys[j]] === values[j]) {
             //inc matches
             matches++;
@@ -180,7 +180,7 @@ const alibarray = () => {
     }
     else {
       //compare primative
-      for (var i = 0; i < arr.length; i++) {
+      for (let i = 0; i < arr.length; i++) {
         if (arr[i] === compareItem) {
           countMatches++;
         }
@@ -190,13 +190,38 @@ const alibarray = () => {
     return countMatches;
   };
 
+  /**
+     * returns last item in array. if the array is empty, undefined is returned
+     * @param {array} arr - array for operation to be executed on
+     * @example 
+     * // should return { color: 'black', size: 12 } as this is last item in array
+     * let result = alibarray().last(data);
+     */
+   const last = (arr) => {
+    return arr.length > 0 ? arr[arr.length -1] : undefined;
+  };
+
+  /**
+     * returns first item in array. if the array is empty, undefined is returned
+     * @param {array} arr - array for operation to be executed on
+     * @example 
+     * // should return { color: 'blue', size: 44 } as this is first item in array
+     * let result = alibarray().first(data);
+     */
+   const first = (arr) => {
+    return arr.length > 0 ? arr[0] : undefined;
+  };  
+
+
   return {
     move,
     swap,
     insert,
     contains,
     position,
-    count
+    count,
+    last,
+    first
   };
 };
 
