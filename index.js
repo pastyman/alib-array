@@ -239,7 +239,7 @@ const alibarray = () => {
   const contains = (arr, compareItem, compareMode) => position(arr, compareItem, compareMode) !== null;
 
   /**
-     * returns array of items from array containing an object with props and values matching that of passed compareItem - if nothing is found, null is returned 
+     * returns array of items from array containing an object with props and values matching that of passed compareItem 
      * @param {array} arr - array for operation to be executed on
      * @param {object} compareItem - item to compare
      * @param {string} [compareMode="all"] - compare mode 'all' matches all props on passed object 'any' any props match, 'exact' - exact match
@@ -251,7 +251,7 @@ const alibarray = () => {
   const match = (arr, compareItem, compareMode) => engine(arr, compareItem, compareMode, 'match');
 
   /**
-     * returns array of items from array containing an object with props and values matching that of passed compareItem - if nothing is found, null is returned 
+     * returns array of items from array containing an object with props and values not matching that of passed compareItem 
      * @param {array} arr - array for operation to be executed on
      * @param {object} compareItem - item to compare
      * @param {string} [compareMode="all"] - compare mode 'all' matches all props on passed object 'any' any props match, 'exact' - exact match
