@@ -54,18 +54,18 @@ var data = [
     { color: 'black', size: 12 },
 ];
 
-var result = alibarray().contains(data, { color: 'green', size: 12 });
+var result = alibarray(data).contains({ color: 'green', size: 12 });
 //=> true - exact match
 
-var result = alibarray().contains(data, { color: 'green', size: 25 });
+var result = alibarray(data).contains( { color: 'green', size: 25 });
 //=> false
 
-var result = alibarray().contains(data, { color: 'green' });
+var result = alibarray(data).contains( { color: 'green' });
 //=> true - although not an exact match, the array contains an object with prop color equal to green
 
 //compareMode can be passed defaults to all - compare mode 'all' matches all props on passed object 'any' any props match from passed object, 'exact' - exact match 
 
-var result = alibarray().contains(data, { color: 'green' }, 'exact');
+var result = alibarray(data).contains( { color: 'green' }, 'exact');
 //=> false - an exact match of { color: 'green' } not found in the array
 
 ```
@@ -76,10 +76,10 @@ contains can also check for primitives:
 
 var data = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
-var result = alibarray().contains(data, 7);
+var result = alibarray(data).contains( 7);
 //=> true
 
-var result = alibarray().contains(data, 99);
+var result = alibarray(data).contains( 99);
 //=> false
 
 ```
@@ -98,18 +98,18 @@ var data = [
     { color: 'black', size: 12 },
 ];
 
-var result = alibarray().position(data, { color: 'green', size: 12 });
+var result = alibarray(data).position( { color: 'green', size: 12 });
 //=> 1 - item at index position 1
 
-var result = alibarray().position(data, { color: 'green' });
+var result = alibarray(data).position( { color: 'green' });
 //=> 1 - item at index position 1
 
 //compareMode can be passed defaults to all - compare mode 'all' matches all props on passed object 'any' any props match from passed object, 'exact' - exact match 
 
-var result = alibarray().position(data, { color: 'green' }, 'exact');
+var result = alibarray(data).position( { color: 'green' }, 'exact');
 //=> null - an exact match of { color: 'green' } not found in the array
 
-var result = alibarray().position(data, { color: 'green', size: 12, details : {shape: 'round', name: 'circle'} });
+var result = alibarray(data).position( { color: 'green', size: 12, details : {shape: 'round', name: 'circle'} });
 //=> null - return null as item is not in the array
 
 ```
@@ -128,14 +128,14 @@ var data = [
     { color: 'black', size: 12 },
 ];
 
-var result = alibarray().count(data, { color: 'green', size: 12 });
+var result = alibarray(data).count( { color: 'green', size: 12 });
 //=> 1 - 1 items match
 
-var result = alibarray().count(data, { color: 'blue' });
+var result = alibarray(data).count( { color: 'blue' });
 //=> 4 - 4 items match
 
 
-var result = alibarray().count(data, { color: 'green', size: 12, details : {shape: 'round', name: 'circle'} });
+var result = alibarray(data).count( { color: 'green', size: 12, details : {shape: 'round', name: 'circle'} });
 //=> 0 - 0 items match
 
 ```
@@ -153,14 +153,14 @@ var data = [
     { color: 'black', size: 12 },
 ];
 
-var result = alibarray().match(data, { color: 'green', size: 12 });
+var result = alibarray(data).match( { color: 'green', size: 12 });
 //=> [{ color: 'green', size: 12 }]
 
-var result = alibarray().match(data, { color: 'blue' });
+var result = alibarray(data).match( { color: 'blue' });
 //=> [{ color: 'blue', size: 44 }, { color: 'blue', size: 9 }, { color: 'blue', size: 4 }, { color: 'blue', size: 12 }]
 
 
-var result = alibarray().match(data, { color: 'green', size: 12, details : {shape: 'round', name: 'circle'} });
+var result = alibarray(data).match( { color: 'green', size: 12, details : {shape: 'round', name: 'circle'} });
 //=> []
 
 ```
@@ -179,18 +179,18 @@ var data = [
     { color: 'black', size: 12 },
 ];
 
-var result = alibarray().find(data, { color: 'green', size: 12 });
+var result = alibarray(data).find( { color: 'green', size: 12 });
 //=> { color: 'green', size: 12 }
 
-var result = alibarray().find(data, { color: 'green' });
+var result = alibarray(data).find( { color: 'green' });
 //=> { color: 'green', size: 12 }
 
 //compareMode can be passed defaults to all - compare mode 'all' matches all props on passed object 'any' any props match from passed object, 'exact' - exact match 
 
-var result = alibarray().find(data, { color: 'green' }, 'exact');
+var result = alibarray(data).find( { color: 'green' }, 'exact');
 //=> null - an exact match of { color: 'green' } not found in the array
 
-var result = alibarray().find(data, { color: 'green', size: 12, details : {shape: 'round', name: 'circle'} });
+var result = alibarray(data).find( { color: 'green', size: 12, details : {shape: 'round', name: 'circle'} });
 //=> null - return null as item is not in the array
 
 ```
@@ -210,13 +210,13 @@ var data = [
     { color: 'black', size: 12 },
 ];
 
-var result = alibarray().exclude(data, { color: 'green', size: 12 });
+var result = alibarray(data).exclude( { color: 'green', size: 12 });
 //=> [{ color: 'blue', size: 44 }, { color: 'red', size: 18 }, { color: 'blue', size: 9 }, { color: 'blue', size: 4 }, { color: 'blue', size: 12 }, { color: 'black', size: 12 }]
 
-var result = alibarray().exclude(data, { color: 'blue' });
+var result = alibarray(data).exclude( { color: 'blue' });
 //=> [{ color: 'green', size: 12 }, { color: 'red', size: 18 }, { color: 'black', size: 12 }]
 
-var result = alibarray().exclude(data, { color: 'green', size: 12, details : {shape: 'round', name: 'circle'} });
+var result = alibarray(data).exclude( { color: 'green', size: 12, details : {shape: 'round', name: 'circle'} });
 //=> [ { color: 'blue', size: 44 }, { color: 'green', size: 12 }, { color: 'red', size: 18 }, { color: 'blue', size: 9 }, { color: 'blue', size: 4 }, { color: 'blue', size: 12 }, { color: 'black', size: 12 }]
 
 ```
@@ -226,7 +226,7 @@ move - moves an item in an array, mutates the array passed to it
 ```js
 
 var data = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
-alibarray().move(data, 4, 8);
+alibarray(data).move( 4, 8);
 
 console.log(data);
 //=> [0, 1, 2, 3, 5, 6, 7, 8, 4, 9, 10]
@@ -238,7 +238,7 @@ insert - inserts an item into an array, if index value is bigger than length of 
 ```js
 
 var data = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
-alibarray().insert(data, 99, 4);
+alibarray(data).insert( 99, 4);
 
 console.log(data);
 //=> [0, 1, 2, 3, 99, 4, 5, 6, 7, 8, 9, 10]
@@ -250,7 +250,7 @@ swap - swaps the position of 2 items in an array, mutates the array passed to it
 ```js
 
 var data = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
-alibarray().swap(data, 4, 8);
+alibarray(data).swap( 4, 8);
 
 console.log(data);
 //=> [0, 1, 2, 3, 8, 5, 6, 7, 4, 9, 10]
@@ -262,7 +262,7 @@ first - returns first item in array. if the array is empty, undefined is returne
 ```js
 
 var data = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
-var result = alibarray().first(data);
+var result = alibarray(data).first();
 
 console.log(result);
 //=> 0
@@ -274,7 +274,7 @@ last - returns last item in array. if the array is empty, undefined is returned
 ```js
 
 var data = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
-var result = alibarray().last(data);
+var result = alibarray(data).last();
 
 console.log(result);
 //=> 10
@@ -294,7 +294,7 @@ var data = [
     { color: 'black', size: 12 },
 ];
 
-var result = alibarray().update(data, { color: 'green' }, { name: 'paris' });
+var result = alibarray(data).update( { color: 'green' }, { name: 'paris' });
 //=> [ { color: 'blue', size: 44 }, { color: 'green', size: 12, name: 'paris' }, { color: 'red', size: 18 }, { color: 'blue', size: 9 }, { color: 'blue', size: 4 }, { color: 'blue', size: 12 }, { color: 'black', size: 12 } ]
 
 ```
@@ -312,7 +312,7 @@ var data = [
     { color: 'black', size: 12 },
 ];
 
-var result = alibarray().replace(data, { color: 'green' }, { name: 'paris' });
+var result = alibarray(data).replace( { color: 'green' }, { name: 'paris' });
 //=> [ { color: 'blue', size: 44 }, { name: 'paris' }, { color: 'red', size: 18 }, { color: 'blue', size: 9 }, { color: 'blue', size: 4 }, { color: 'blue', size: 12 }, { color: 'black', size: 12 } ]
 
 ```
@@ -332,7 +332,7 @@ var data = [
   { color: 'black', size: 12 },
 ];
 
-var result = alibarray().unique(data, 'color');
+var result = alibarray(data).unique( 'color');
 //=> [{ color: 'blue', size: 44 }, { color: 'green', size: 12 }, { color: 'red', size: 18 }, { color: 'gold', size: 15 }, { color: 'black', size: 12 }] only items with unique value for prop color are returned
 
 ```

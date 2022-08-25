@@ -116,62 +116,62 @@ var dataReplacet1 = [
 describe('alibarray', function () {
   describe('#contains()', function () {
     it('should return true as item is contained in the array', function () {
-      var result = alibarray().contains(data, { color: 'green', size: 12 });
+      var result = alibarray(data).contains({ color: 'green', size: 12 });
       assert.equal(result, true);
     });
 
     it('should return true as item is contained in the array', function () {
-      var result = alibarray().contains(data, { color: 'green' });
+      var result = alibarray(data).contains({ color: 'green' });
       assert.equal(result, true);
     });
 
     it('should return true as item is contained in the array', function () {
-      var result = alibarray().contains(data, {});
+      var result = alibarray(data).contains({});
       assert.equal(result, true);
     });
 
     it('should return false as item is not contained in the array', function () {
-      var result = alibarray().contains(data, { color: 'green', size: 12, details: { shape: 'round', name: 'circle' } });
+      var result = alibarray(data).contains({ color: 'green', size: 12, details: { shape: 'round', name: 'circle' } });
       assert.equal(result, false);
     });
 
     it('should return false as item is not contained in the array', function () {
-      var result = alibarray().contains(data, { color: 'green', size: 25 });
+      var result = alibarray(data).contains({ color: 'green', size: 25 });
       assert.equal(result, false);
     });
 
     it('should return false as item is not contained in the array', function () {
-      var result = alibarray().contains(data, { color: 'green', size: 25, type: 'jumper' });
+      var result = alibarray(data).contains({ color: 'green', size: 25, type: 'jumper' });
       assert.equal(result, false);
     });
 
     it('should return false as item is not contained in the array', function () {
-      var result = alibarray().contains(data, { mega: true });
+      var result = alibarray(data).contains({ mega: true });
       assert.equal(result, false);
     });
 
     it('should return false as exact item is not contained in the array', function () {
-      var result = alibarray().contains(data, { color: 'green' }, 'exact');
+      var result = alibarray(data).contains({ color: 'green' }, 'exact');
       assert.equal(result, false);
     });
 
     it('should return true as one item with matching prop contained in the array', function () {
-      var result = alibarray().contains(data, { color: 'green', size: 12, details: { shape: 'round', name: 'circle' } }, 'any');
+      var result = alibarray(data).contains({ color: 'green', size: 12, details: { shape: 'round', name: 'circle' } }, 'any');
       assert.equal(result, true);
     });
 
     it('should return false as primative is not contained in the array', function () {
-      var result = alibarray().contains(data, 7);
+      var result = alibarray(data).contains(7);
       assert.equal(result, false);
     });
 
     it('should return true as primative is contained in the array', function () {
-      var result = alibarray().contains(data2, 7);
+      var result = alibarray(data2).contains(7);
       assert.equal(result, true);
     });
 
     it('should return false as primative is not contained in the array', function () {
-      var result = alibarray().contains(data2, 41);
+      var result = alibarray(data2).contains(41);
       assert.equal(result, false);
     });
 
@@ -181,52 +181,52 @@ describe('alibarray', function () {
 
   describe('#position()', function () {
     it('should return 1 as item is at index pos 1 in the array', function () {
-      var result = alibarray().position(data, { color: 'green', size: 12 });
+      var result = alibarray(data).position({ color: 'green', size: 12 });
       assert.equal(result, 1);
     });
 
     it('should return 1 as item is at index pos 1 in the array', function () {
-      var result = alibarray().position(data, { color: 'green' });
+      var result = alibarray(data).position({ color: 'green' });
       assert.equal(result, 1);
     });
 
     it('should return 0 as item is at index pos 0 in the array', function () {
-      var result = alibarray().position(data, {});
+      var result = alibarray(data).position({});
       assert.equal(result, 0);
     });
 
     it('should return null as item is not contained in the array', function () {
-      var result = alibarray().position(data, { color: 'green', size: 12, details: { shape: 'round', name: 'circle' } });
+      var result = alibarray(data).position({ color: 'green', size: 12, details: { shape: 'round', name: 'circle' } });
       assert.equal(result, null);
     });
 
     it('should return null as item is not contained in the array', function () {
-      var result = alibarray().position(data, { color: 'green', size: 25 });
+      var result = alibarray(data).position({ color: 'green', size: 25 });
       assert.equal(result, null);
     });
 
     it('should return null as item is not contained in the array', function () {
-      var result = alibarray().position(data, { color: 'green', size: 25, type: 'jumper' });
+      var result = alibarray(data).position({ color: 'green', size: 25, type: 'jumper' });
       assert.equal(result, null);
     });
 
     it('should return null as item is not contained in the array', function () {
-      var result = alibarray().position(data, { mega: true });
+      var result = alibarray(data).position({ mega: true });
       assert.equal(result, null);
     });
 
     it('should return null as primative is not contained in the array', function () {
-      var result = alibarray().position(data, 7);
+      var result = alibarray(data).position(7);
       assert.equal(result, null);
     });
 
     it('should return 6 as primative is at index pos 6 in the array', function () {
-      var result = alibarray().position(data2, 7);
+      var result = alibarray(data2).position(7);
       assert.equal(result, 6);
     });
 
     it('should return null as primative is not contained in the array', function () {
-      var result = alibarray().position(data2, 41);
+      var result = alibarray(data2).position(41);
       assert.equal(result, null);
     });
   });
@@ -234,147 +234,147 @@ describe('alibarray', function () {
 
   describe('#find()', function () {
     it('should return item at index pos 1 in the array', function () {
-      var result = alibarray().find(data, { color: 'green', size: 12 });
+      var result = alibarray(data).find({ color: 'green', size: 12 });
       assert.deepEqual(result, { color: 'green', size: 12 });
     });
 
     it('should return item at index pos 1 in the array', function () {
-      var result = alibarray().find(data, { color: 'green' });
+      var result = alibarray(data).find({ color: 'green' });
       assert.deepEqual(result, { color: 'green', size: 12 });
     });
 
     it('should return 0 as item is at index pos 0 in the array', function () {
-      var result = alibarray().find(data, {});
+      var result = alibarray(data).find({});
       assert.deepEqual(result, { color: 'blue', size: 44 });
     });
 
     it('should return null as item is not contained in the array', function () {
-      var result = alibarray().find(data, { color: 'green', size: 12, details: { shape: 'round', name: 'circle' } });
+      var result = alibarray(data).find({ color: 'green', size: 12, details: { shape: 'round', name: 'circle' } });
       assert.equal(result, null);
     });
 
     it('should return null as item is not contained in the array', function () {
-      var result = alibarray().find(data, { color: 'green', size: 25 });
+      var result = alibarray(data).find({ color: 'green', size: 25 });
       assert.equal(result, null);
     });
 
     it('should return null as item is not contained in the array', function () {
-      var result = alibarray().find(data, { color: 'green', size: 25, type: 'jumper' });
+      var result = alibarray(data).find({ color: 'green', size: 25, type: 'jumper' });
       assert.equal(result, null);
     });
 
     it('should return null as item is not contained in the array', function () {
-      var result = alibarray().find(data, { mega: true });
+      var result = alibarray(data).find({ mega: true });
       assert.equal(result, null);
     });
 
     it('should return null as primative is not contained in the array', function () {
-      var result = alibarray().find(data, 7);
+      var result = alibarray(data).find(7);
       assert.equal(result, null);
     });
 
     it('should return 7 as 7 in the array', function () {
-      var result = alibarray().find(data2, 7);
+      var result = alibarray(data2).find(7);
       assert.equal(result, 7);
     });
 
     it('should return null as primative is not contained in the array', function () {
-      var result = alibarray().find(data2, 41);
+      var result = alibarray(data2).find(41);
       assert.equal(result, null);
     });
   });  
 
   describe('#count()', function () {
     it('should return 1 as 1 item matches in the array', function () {
-      var result = alibarray().count(data, { color: 'green', size: 12 });
+      var result = alibarray(data).count( { color: 'green', size: 12 });
       assert.equal(result, 1);
     });
 
     it('should return 4 as 4 item matches in the array', function () {
-      var result = alibarray().count(data, { color: 'blue' });
+      var result = alibarray(data).count( { color: 'blue' });
       assert.equal(result, 4);
     });
 
     it('should return 3 as 3 item matches in the array', function () {
-      var result = alibarray().count(data, { size: 12 });
+      var result = alibarray(data).count( { size: 12 });
       assert.equal(result, 3);
     });
 
     it('should return 0 as 0 item matches in the array', function () {
-      var result = alibarray().count(data, { color: 'green', size: 55 });
+      var result = alibarray(data).count( { color: 'green', size: 55 });
       assert.equal(result, 0);
     });
   });
 
   describe('#insert()', function () {
     it('should insert item at index position 3', function () {
-      alibarray().insert(data, { color: 'gold', size: 15 }, 3);
+      alibarray(data).insert({ color: 'gold', size: 15 }, 3);
       assert.deepEqual(data, datat1);
     });
   });
 
   describe('#move()', function () {
     it('should move item from index 4 to index 8', function () {
-      alibarray().move(data3, 4, 8);
+      alibarray(data3).move(4, 8);
       assert.deepEqual(data3, data3t1);
     });
   });
 
   describe('#insert()', function () {
     it('should insert item at index 4', function () {
-      alibarray().insert(data4, 99, 4);
+      alibarray(data4).insert(99, 4);
       assert.deepEqual(data4, data4t1);
     });
   });
 
   describe('#swap()', function () {
     it('should swap items at index 4 and 8', function () {
-      alibarray().swap(data5, 4, 8);
+      alibarray(data5).swap(4, 8);
       assert.deepEqual(data5, data5t1);
     });
   });
 
   describe('#first()', function () {
     it('should return first item in array', function () {
-      var result = alibarray().first(data);
+      var result = alibarray(data).first();
       assert.deepEqual(result, datat2);
     });
     it('should return undefined as array empty', function () {
-      var result = alibarray().first([]);
+      var result = alibarray([]).first();
       assert.deepEqual(result, undefined);
     });
   });
 
   describe('#last()', function () {
     it('should return last item in array', function () {
-      var result = alibarray().last(data);
+      var result = alibarray(data).last();
       assert.deepEqual(result, datat3);
     });
     it('should return undefined as array empty', function () {
-      var result = alibarray().last([]);
+      var result = alibarray([]).last();
       assert.deepEqual(result, undefined);
     });
   });
 
   describe('#unique()', function () {
     it('should return first items found with unique color prop value', function () {
-      var result = alibarray().unique(data, 'color');
+      var result = alibarray(data).unique('color');
       assert.deepEqual(result, datat4);
     });
   });
 
   describe('#match()', function () {
     it('should return array of items with item match object with passed props', function () {
-      var result = alibarray().match(data, { color: 'blue' });
+      var result = alibarray(data).match({ color: 'blue' });
       assert.deepEqual(result, datat5);
     });
     it('should return array of items with item match object with passed props of empty array', function () {
-      var result = alibarray().match(data6, { postIds: [] });
+      var result = alibarray(data6).match({ postIds: [] });
 
       assert.deepEqual(result, data6t1);
     });
     it('should return array of items with item match object with passed props of passed array', function () {
-      var result = alibarray().match(data6, { postIds: [7, 12, 15, 18] });
+      var result = alibarray(data6).match({ postIds: [7, 12, 15, 18] });
 
       assert.deepEqual(result, data6t2);
     });
@@ -382,18 +382,18 @@ describe('alibarray', function () {
 
   describe('#exclude()', function () {
     it('should return array of items with item excluding match object with passed props', function () {
-      var result = alibarray().exclude(data, { color: 'blue' });
+      var result = alibarray(data).exclude({ color: 'blue' });
 
       console.log('result', result)
       assert.deepEqual(result, datat6);
     });
     it('should return array of items with item excluding match object with passed props of empty array', function () {
-      var result = alibarray().exclude(data6, { postIds: [] });
+      var result = alibarray(data6).exclude({ postIds: [] });
 
       assert.deepEqual(result, data6t3);
     });
     it('should return array of items with item excluding match object with passed props of passed array', function () {
-      var result = alibarray().exclude(data6, { postIds: [7, 12, 15, 18] });
+      var result = alibarray(data6).exclude({ postIds: [7, 12, 15, 18] });
 
       assert.deepEqual(result, data6t4);
     });
@@ -401,14 +401,14 @@ describe('alibarray', function () {
 
   describe('#update()', function () {
     it('should update found item with additional props', function () {
-      alibarray().update(dataUpdate, { color: 'green' }, { name: 'paris'});
+      alibarray(dataUpdate).update({ color: 'green' }, { name: 'paris'});
       assert.deepEqual(dataUpdate, dataUpdatet1);
     });
   }); 
 
   describe('#replace()', function () {
     it('should replace found item with passed object', function () {
-      alibarray().replace(dataReplace, { color: 'green' }, { name: 'paris'});
+      alibarray(dataReplace).replace({ color: 'green' }, { name: 'paris'});
       assert.deepEqual(dataReplace, dataReplacet1);
     });
   });   
