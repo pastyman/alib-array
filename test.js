@@ -282,6 +282,11 @@ describe('alibarray', function () {
       var result = alibarray(data2).find(41);
       assert.equal(result, null);
     });
+
+    it('should return null as non array passed in', function () {
+      var result = alibarray(undefined).find({ color: 'green', size: 12 });
+      assert.deepEqual(result, null);
+    });    
   });  
 
   describe('#count()', function () {

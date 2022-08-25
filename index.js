@@ -11,6 +11,18 @@ const alibarray = (arr) => {
     let arrMatches = [];
     let countMatches = 0;
 
+    if (!Array.isArray(arr)){
+      if (mode === 'match' || mode === 'exclude') {
+        return arrMatches;
+      }
+      if (mode === 'position') {
+        return pos;
+      }
+      if (mode === 'count') {
+        return countMatches;
+      }
+    }
+
     //normalise compare mode
     let nCompareMode = 'all';
     if (compareMode && (compareMode === 'any' || compareMode === 'exact')) {
