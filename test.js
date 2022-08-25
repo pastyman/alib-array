@@ -29,6 +29,8 @@ var datat1 = [
 var datat2 = { color: 'blue', size: 44 };
 var datat3 = { color: 'black', size: 12 };
 var datat4 = [{ color: 'blue', size: 44 }, { color: 'green', size: 12 }, { color: 'red', size: 18 }, { color: 'gold', size: 15 }, { color: 'black', size: 12 }];
+var datat5 = [{ color: 'blue', size: 44 }, { color: 'blue', size: 9 }, { color: 'blue', size: 4 }, { color: 'blue', size: 12 }];
+var datat6 = [{ color: 'green', size: 12 }, { color: 'red', size: 18 }, { color: 'gold', size: 15 }, { color: 'black', size: 12 }];
 
 var data2 = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
@@ -40,6 +42,38 @@ var data4t1 = [0, 1, 2, 3, 99, 4, 5, 6, 7, 8, 9, 10];
 
 var data5 = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 var data5t1 = [0, 1, 2, 3, 8, 5, 6, 7, 4, 9, 10];
+
+var data6 = [
+  { color: 'blue', size: 44, postIds: [] },
+  { color: 'green', size: 12, postIds: [7, 12, 15, 18] },
+  { color: 'red', size: 18, postIds: [7, 12, 15, 18] },
+  { color: 'blue', size: 9, postIds: [] },
+  { color: 'blue', size: 4, postIds: [] },
+  { color: 'blue', size: 12, postIds: [9, 10, 15, 18] },
+  { color: 'black', size: 12, postIds: [9, 10, 15, 18] },
+];
+var data6t1 = [
+  { color: 'blue', size: 44, postIds: [] },
+  { color: 'blue', size: 9, postIds: [] },
+  { color: 'blue', size: 4, postIds: [] },
+];
+var data6t2 = [
+  { color: 'green', size: 12, postIds: [7, 12, 15, 18] },
+  { color: 'red', size: 18, postIds: [7, 12, 15, 18] }
+];
+var data6t3 = [
+  { color: 'green', size: 12, postIds: [7, 12, 15, 18] },
+  { color: 'red', size: 18, postIds: [7, 12, 15, 18] },
+  { color: 'blue', size: 12, postIds: [9, 10, 15, 18] },
+  { color: 'black', size: 12, postIds: [9, 10, 15, 18] },
+];
+var data6t4 = [
+  { color: 'blue', size: 44, postIds: [] },
+  { color: 'blue', size: 9, postIds: [] },
+  { color: 'blue', size: 4, postIds: [] },
+  { color: 'blue', size: 12, postIds: [9, 10, 15, 18] },
+  { color: 'black', size: 12, postIds: [9, 10, 15, 18] },
+];
 
 describe('alibarray', function () {
   describe('#contains()', function () {
@@ -237,4 +271,40 @@ describe('alibarray', function () {
       assert.deepEqual(result, datat4);
     });
   });
+
+  describe('#match()', function () {
+    it('should return array of items with item match object with passed props', function () {
+      var result = alibarray().match(data, { color: 'blue' });
+      assert.deepEqual(result, datat5);
+    });
+    it('should return array of items with item match object with passed props of empty array', function () {
+      var result = alibarray().match(data6, { postIds: [] });
+
+      assert.deepEqual(result, data6t1);
+    });
+    it('should return array of items with item match object with passed props of passed array', function () {
+      var result = alibarray().match(data6, { postIds: [7, 12, 15, 18] });
+
+      assert.deepEqual(result, data6t2);
+    });
+  });
+
+  describe('#exclude()', function () {
+    it('should return array of items with item excluding match object with passed props', function () {
+      var result = alibarray().exclude(data, { color: 'blue' });
+
+      console.log('result', result)
+      assert.deepEqual(result, datat6);
+    });
+    it('should return array of items with item excluding match object with passed props of empty array', function () {
+      var result = alibarray().exclude(data6, { postIds: [] });
+
+      assert.deepEqual(result, data6t3);
+    });
+    it('should return array of items with item excluding match object with passed props of passed array', function () {
+      var result = alibarray().exclude(data6, { postIds: [7, 12, 15, 18] });
+
+      assert.deepEqual(result, data6t4);
+    });
+  });  
 });

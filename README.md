@@ -133,6 +133,56 @@ var result = alibarray().count(data, { color: 'green', size: 12, details : {shap
 //=> 0 - 0 items match
 
 ```
+match - returns array of items in array containing an object with props and values matching that of passed compareItem:
+
+```js
+
+var data = [
+    { color: 'blue', size: 44 },
+    { color: 'green', size: 12 },
+    { color: 'red', size: 18 },
+    { color: 'blue', size: 9 },
+    { color: 'blue', size: 4 },
+    { color: 'blue', size: 12 },
+    { color: 'black', size: 12 },
+];
+
+var result = alibarray().match(data, { color: 'green', size: 12 });
+//=> [{ color: 'green', size: 12 }]
+
+var result = alibarray().match(data, { color: 'blue' });
+//=> [{ color: 'blue', size: 44 }, { color: 'blue', size: 9 }, { color: 'blue', size: 4 }, { color: 'blue', size: 12 }]
+
+
+var result = alibarray().match(data, { color: 'green', size: 12, details : {shape: 'round', name: 'circle'} });
+//=> []
+
+```
+
+exclude - returns array of items in array containing an object with props and values not matching that of passed compareItem:
+
+```js
+
+var data = [
+    { color: 'blue', size: 44 },
+    { color: 'green', size: 12 },
+    { color: 'red', size: 18 },
+    { color: 'blue', size: 9 },
+    { color: 'blue', size: 4 },
+    { color: 'blue', size: 12 },
+    { color: 'black', size: 12 },
+];
+
+var result = alibarray().exclude(data, { color: 'green', size: 12 });
+//=> [{ color: 'blue', size: 44 }, { color: 'red', size: 18 }, { color: 'blue', size: 9 }, { color: 'blue', size: 4 }, { color: 'blue', size: 12 }, { color: 'black', size: 12 }]
+
+var result = alibarray().exclude(data, { color: 'blue' });
+//=> [{ color: 'green', size: 12 }, { color: 'red', size: 18 }, { color: 'black', size: 12 }]
+
+var result = alibarray().exclude(data, { color: 'green', size: 12, details : {shape: 'round', name: 'circle'} });
+//=> [ { color: 'blue', size: 44 }, { color: 'green', size: 12 }, { color: 'red', size: 18 }, { color: 'blue', size: 9 }, { color: 'blue', size: 4 }, { color: 'blue', size: 12 }, { color: 'black', size: 12 }]
+
+```
 
 move - moves an item in an array, mutates the array passed to it
 

@@ -2,6 +2,124 @@
 
 //a set of array helper functions
 const alibarray = () => {
+  //match engine
+  const engine = (arr, compareItem, compareMode, mode) => {
+    let pos = null;
+    let arrMatches = [];
+    let countMatches = 0;
+
+    //normalise compare mode
+    let nCompareMode = 'all';
+    if (compareMode && (compareMode === 'any' || compareMode === 'exact')) {
+      nCompareMode = compareMode;
+    }
+
+    //first enumerate obj props and values
+    if (typeof (compareItem) === 'object') {
+      let keys = [];
+      let values = [];
+      for (let prop in compareItem) {
+        if (compareItem.hasOwnProperty(prop)) {
+          //The current property is a direct property
+          keys.push(prop);
+          values.push(compareItem[prop]);
+        }
+      }
+
+      //iterate through and match
+      for (let i = 0; i < arr.length; i++) {
+        let matches = 0;
+        for (let j = 0; j < keys.length; j++) {
+          if (!Array.isArray(arr[i][keys[j]]) && arr[i][keys[j]] === values[j]) {
+            //inc matches
+            matches++;
+          }
+          if (Array.isArray(arr[i][keys[j]]) && JSON.stringify(arr[i][keys[j]]) === JSON.stringify(values[j])) {
+            //inc matches
+            matches++;
+          }
+        }
+
+        let exclude = false;
+        if ((nCompareMode === 'all' && matches === keys.length) || (nCompareMode === 'any' && matches > 0)) {
+          if (mode === 'match') {
+            arrMatches.push(arr[i]);
+          }
+          if (mode === 'exclude') {
+            exclude = true;
+          }
+          if (mode === 'position') {
+            pos = i;
+            break;
+          }
+          if (mode === 'count') {
+            countMatches++;
+          }
+        }
+        if (nCompareMode === 'exact' && matches === keys.length) {
+          //now check prop count
+          let pcount = 0;
+          for (let prop in arr[i]) {
+            if (arr[i].hasOwnProperty(prop)) {
+              pcount++;
+            }
+          }
+
+          if (pcount === keys.length) {
+            if (mode === 'match') {
+              arrMatches.push(arr[i]);
+            }
+            if (mode === 'exclude') {
+              exclude = true;
+            }
+            if (mode === 'position') {
+              pos = i;
+              break;
+            }
+            if (mode === 'count') {
+              countMatches++;
+            }
+          }
+        }
+        if (mode === 'exclude' && exclude === false) {
+          arrMatches.push(arr[i]);
+        }
+
+      }
+    }
+    else {
+      //compare primative
+      for (let i = 0; i < arr.length; i++) {
+        if (arr[i] !== compareItem) {
+          if (mode === 'exclude') {
+            arrMatches.push(arr[i]);
+          }
+        }
+        if (arr[i] === compareItem) {
+          if (mode === 'match') {
+            arrMatches.push(arr[i]);
+          }
+          if (mode === 'position') {
+            pos = i;
+            break;
+          }
+          if (mode === 'count') {
+            countMatches++;
+          }
+        }
+      }
+    }
+
+    if (mode === 'match' || mode === 'exclude') {
+      return arrMatches;
+    }
+    if (mode === 'position') {
+      return pos;
+    }
+    if (mode === 'count') {
+      return countMatches;
+    }
+  };
 
   /**
      * moves an item in an array, mutates the array passed to it
@@ -43,25 +161,6 @@ const alibarray = () => {
   };
 
   /**
-     * checks if an array contains an object with props and values matching that of passed compareItem 
-     * @param {array} arr - array for operation to be executed on
-     * @param {object} compareItem - item to compare
-     * @param {string} [compareMode="all"] - compare mode 'all' matches all props on passed object 'any' any props match, 'exact' - exact match
-     * @return {boolean}  - true if array contains item match
-     * @example 
-     * // check if array data contains object like: { color: 'green', size: 12 }
-     * let result = alibarray().contains(data, { color: 'green', size: 12 });
-     */
-  const contains = (arr, compareItem, compareMode) => {
-    if (position(arr, compareItem, compareMode) !== null) {
-      return true;
-    }
-    else {
-      return false;
-    }
-  };
-
-  /**
      * returns position of first item in array containing an object with props and values matching that of passed compareItem - if nothing is found, null is returned 
      * @param {array} arr - array for operation to be executed on
      * @param {object} compareItem - item to compare
@@ -71,73 +170,43 @@ const alibarray = () => {
      * // should return 1 as item is at index pos 1 in the array
      * let result = alibarray().position(data, { color: 'green', size: 12 });
      */
-  const position = (arr, compareItem, compareMode) => {
-    let pos = null;
+  const position = (arr, compareItem, compareMode) => engine(arr, compareItem, compareMode, 'position');
 
-    //normalise compare mode
-    let nCompareMode = 'all';
-    if (compareMode && (compareMode === 'any' || compareMode === 'exact')) {
-      nCompareMode = compareMode;
-    }
+  /**
+     * checks if an array contains an object with props and values matching that of passed compareItem 
+     * @param {array} arr - array for operation to be executed on
+     * @param {object} compareItem - item to compare
+     * @param {string} [compareMode="all"] - compare mode 'all' matches all props on passed object 'any' any props match, 'exact' - exact match
+     * @return {boolean}  - true if array contains item match
+     * @example 
+     * // check if array data contains object like: { color: 'green', size: 12 }
+     * let result = alibarray().contains(data, { color: 'green', size: 12 });
+     */
+  const contains = (arr, compareItem, compareMode) => position(arr, compareItem, compareMode) !== null;
 
-    //first enumerate obj props and values
-    if (typeof (compareItem) === 'object') {
-      let keys = [];
-      let values = [];
-      for (let prop in compareItem) {
-        if (compareItem.hasOwnProperty(prop)) {
-          //The current property is a direct property
-          keys.push(prop);
-          values.push(compareItem[prop]);
-        }
-      }
+  /**
+     * returns array of items in array containing an object with props and values matching that of passed compareItem - if nothing is found, null is returned 
+     * @param {array} arr - array for operation to be executed on
+     * @param {object} compareItem - item to compare
+     * @param {string} [compareMode="all"] - compare mode 'all' matches all props on passed object 'any' any props match, 'exact' - exact match
+     * @return {int}  - positon if array contains item, otherwise null 
+     * @example 
+     * // should return [  { color: 'blue', size: 44 }, { color: 'blue', size: 9 }, { color: 'blue', size: 4 }, { color: 'blue', size: 12 }] as item match object with passed props
+     * let result = alibarray().match(data, { color: 'blue' });
+     */
+  const match = (arr, compareItem, compareMode) => engine(arr, compareItem, compareMode, 'match');
 
-      //iterate through and match
-      for (let i = 0; i < arr.length; i++) {
-        let matches = 0;
-        for (let j = 0; j < keys.length; j++) {
-          if (arr[i][keys[j]] === values[j]) {
-            //inc matches
-            matches++;
-          }
-        }
-
-        if (nCompareMode === 'all' && matches === keys.length) {
-          pos = i;
-          break;
-        }
-        if (nCompareMode === 'any' && matches > 0) {
-          pos = i;
-          break;
-        }
-        if (nCompareMode === 'exact' && matches === keys.length) {
-          //now check prop count
-          let pcount = 0;
-          for (let prop in arr[i]) {
-            if (arr[i].hasOwnProperty(prop)) {
-              pcount++;
-            }
-          }
-
-          if (pcount === keys.length) {
-            pos = i;
-            break;
-          }
-        }
-      }
-    }
-    else {
-      //compare primative
-      for (let i = 0; i < arr.length; i++) {
-        if (arr[i] === compareItem) {
-          pos = i;
-          break;
-        }
-      }
-    }
-
-    return pos;
-  };
+  /**
+     * returns array of items in array containing an object with props and values matching that of passed compareItem - if nothing is found, null is returned 
+     * @param {array} arr - array for operation to be executed on
+     * @param {object} compareItem - item to compare
+     * @param {string} [compareMode="all"] - compare mode 'all' matches all props on passed object 'any' any props match, 'exact' - exact match
+     * @return {int}  - positon if array contains item, otherwise null 
+     * @example 
+     * // should return [  { color: 'blue', size: 44 }, { color: 'blue', size: 9 }, { color: 'blue', size: 4 }, { color: 'blue', size: 12 }] as item match object with passed props
+     * let result = alibarray().match(data, { color: 'blue' });
+     */
+   const exclude = (arr, compareItem, compareMode) => engine(arr, compareItem, compareMode, 'exclude');  
 
   /**
    * returns number of items in array containing an object with props and values matching that of passed compareItem 
@@ -148,47 +217,7 @@ const alibarray = () => {
    * // should return 3 as there are 3 items matching compareItem in the array
    * let result = alibarray().count(data, { color: 'green'});
    */
-  const count = (arr, compareItem) => {
-    let countMatches = 0;
-
-    //first enumerate obj props and values
-    if (typeof (compareItem) === 'object') {
-      let keys = [];
-      let values = [];
-      for (let prop in compareItem) {
-        if (compareItem.hasOwnProperty(prop)) {
-          //The current property is a direct property
-          keys.push(prop);
-          values.push(compareItem[prop]);
-        }
-      }
-
-      //iterate through and match
-      for (let i = 0; i < arr.length; i++) {
-        let matches = 0;
-        for (let j = 0; j < keys.length; j++) {
-          if (arr[i][keys[j]] === values[j]) {
-            //inc matches
-            matches++;
-          }
-        }
-
-        if (matches === keys.length) {
-          countMatches++;
-        }
-      }
-    }
-    else {
-      //compare primative
-      for (let i = 0; i < arr.length; i++) {
-        if (arr[i] === compareItem) {
-          countMatches++;
-        }
-      }
-    }
-
-    return countMatches;
-  };
+  const count = (arr, compareItem, compareMode) => engine(arr, compareItem, compareMode, 'count');
 
   /**
      * returns last item in array. if the array is empty, undefined is returned
@@ -231,6 +260,8 @@ const alibarray = () => {
     insert,
     contains,
     position,
+    match,
+    exclude,
     count,
     last,
     first,
