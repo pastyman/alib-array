@@ -294,7 +294,9 @@ var data = [
     { color: 'black', size: 12 },
 ];
 
-var result = alibarray(data).update({ color: 'green' }, { name: 'paris' });
+alibarray(data).update({ color: 'green' }, { name: 'paris' });
+
+console.log(data);
 //=> [ { color: 'blue', size: 44 }, { color: 'green', size: 12, name: 'paris' }, { color: 'red', size: 18 }, { color: 'blue', size: 9 }, { color: 'blue', size: 4 }, { color: 'blue', size: 12 }, { color: 'black', size: 12 } ]
 
 ```
@@ -312,7 +314,9 @@ var data = [
     { color: 'black', size: 12 },
 ];
 
-var result = alibarray(data).replace({ color: 'green' }, { name: 'paris' });
+alibarray(data).replace({ color: 'green' }, { name: 'paris' });
+
+console.log(data);
 //=> [ { color: 'blue', size: 44 }, { name: 'paris' }, { color: 'red', size: 18 }, { color: 'blue', size: 9 }, { color: 'blue', size: 4 }, { color: 'blue', size: 12 }, { color: 'black', size: 12 } ]
 
 ```
