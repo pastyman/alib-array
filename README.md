@@ -312,7 +312,7 @@ var data = [
     { color: 'black', size: 12 },
 ];
 
-var result = alibarray().update(data, { color: 'green' }, { name: 'paris' });
+var result = alibarray().replace(data, { color: 'green' }, { name: 'paris' });
 //=> [ { color: 'blue', size: 44 }, { name: 'paris' }, { color: 'red', size: 18 }, { color: 'blue', size: 9 }, { color: 'blue', size: 4 }, { color: 'blue', size: 12 }, { color: 'black', size: 12 } ]
 
 ```
