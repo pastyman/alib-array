@@ -154,7 +154,7 @@ const alibarray = (arr) => {
      * @param {int} index - position in array to insert item - if value is bigger than length of array, item will be placed at the end
      * @example 
      * // mutates array data to insert: { color: 'gold', size: 15 } at index 3 
-     * alibarray().insert(data, { color: 'gold', size: 15 }, 3);
+     * alibarray(data).insert({ color: 'gold', size: 15 }, 3);
      */
   const insert = (item, index) => {
     arr.splice(index, 0, item);
@@ -167,7 +167,7 @@ const alibarray = (arr) => {
      * @return {int}  - positon if array contains item, otherwise null 
      * @example 
      * // should return 1 as item is at index pos 1 in the array
-     * let result = alibarray().position(data, { color: 'green', size: 12 });
+     * let result = alibarray(data).position({ color: 'green', size: 12 });
      */
   const position = (compareItem, compareMode) => engine(compareItem, compareMode, 'position');
 
@@ -178,7 +178,7 @@ const alibarray = (arr) => {
      * @return {int}  - positon if array contains item, otherwise null 
      * @example 
      * // should return 1 as item is at index pos 1 in the array
-     * let result = alibarray().position(data, { color: 'green', size: 12 });
+     * let result = alibarray(data).position({ color: 'green', size: 12 });
      */
   const find = (compareItem, compareMode) => {
     let position = engine(compareItem, compareMode, 'position');
@@ -193,7 +193,7 @@ const alibarray = (arr) => {
      * @return {int}  - positon if array contains item, otherwise null 
      * @example 
      * // should update first item in array found using { color: 'green' } that is { color: 'green', size: 12 } to { color: 'green', size: 12, name: 'paris' }
-     * let result = alibarray().update(data, { color: 'green' }, { name: 'paris' });
+     * let result = alibarray(data).update({ color: 'green' }, { name: 'paris' });
      */
   const update = (compareItem, updateItem, compareMode) => {
     let position = engine(compareItem, compareMode, 'position');
@@ -213,7 +213,7 @@ const alibarray = (arr) => {
      * @return {int}  - positon if array contains item, otherwise null 
      * @example 
      * // should replace first item in array found using { color: 'green' } that is { color: 'green', size: 12 } to { name: 'paris' }
-     * let result = alibarray().replace(data, { color: 'green' }, { name: 'paris' });
+     * let result = alibarray(data).replace({ color: 'green' }, { name: 'paris' });
      */
   const replace = (compareItem, replaceItem, compareMode) => {
     let position = engine(compareItem, compareMode, 'position');
@@ -229,7 +229,7 @@ const alibarray = (arr) => {
      * @return {boolean}  - true if array contains item match
      * @example 
      * // check if array data contains object like: { color: 'green', size: 12 }
-     * let result = alibarray().contains(data, { color: 'green', size: 12 });
+     * let result = alibarray(data).contains({ color: 'green', size: 12 });
      */
   const contains = (compareItem, compareMode) => position(compareItem, compareMode) !== null;
 
@@ -240,7 +240,7 @@ const alibarray = (arr) => {
      * @return {int}  - positon if array contains item, otherwise null 
      * @example 
      * // should return [  { color: 'blue', size: 44 }, { color: 'blue', size: 9 }, { color: 'blue', size: 4 }, { color: 'blue', size: 12 }] as item match object with passed props
-     * let result = alibarray().match(data, { color: 'blue' });
+     * let result = alibarray(data).match({ color: 'blue' });
      */
   const match = (compareItem, compareMode) => engine(compareItem, compareMode, 'match');
 
@@ -250,8 +250,8 @@ const alibarray = (arr) => {
      * @param {string} [compareMode="all"] - compare mode 'all' matches all props on passed object 'any' any props match, 'exact' - exact match
      * @return {int}  - positon if array contains item, otherwise null 
      * @example 
-     * // should return [  { color: 'blue', size: 44 }, { color: 'blue', size: 9 }, { color: 'blue', size: 4 }, { color: 'blue', size: 12 }] as item match object with passed props
-     * let result = alibarray().match(data, { color: 'blue' });
+     * // should return [{ color: 'blue', size: 44 }, { color: 'blue', size: 9 }, { color: 'blue', size: 4 }, { color: 'blue', size: 12 }] as item match object with passed props
+     * let result = alibarray(data).match({ color: 'blue' });
      */
   const exclude = (compareItem, compareMode) => engine(compareItem, compareMode, 'exclude');
 
@@ -261,7 +261,7 @@ const alibarray = (arr) => {
    * @return {int}  - number of matching items 
    * @example 
    * // should return 3 as there are 3 items matching compareItem in the array
-   * let result = alibarray().count(data, { color: 'green'});
+   * let result = alibarray(data).count({ color: 'green'});
    */
   const count = (compareItem, compareMode) => engine(compareItem, compareMode, 'count');
 
@@ -269,7 +269,7 @@ const alibarray = (arr) => {
      * returns last item in array. if the array is empty, undefined is returned
      * @example 
      * // should return { color: 'black', size: 12 } as this is last item in array
-     * let result = alibarray().last(data);
+     * let result = alibarray(data).last();
      */
   const last = () => {
     return arr.length > 0 ? arr[arr.length - 1] : undefined;
@@ -279,7 +279,7 @@ const alibarray = (arr) => {
      * returns first item in array. if the array is empty, undefined is returned
      * @example 
      * // should return { color: 'blue', size: 44 } as this is first item in array
-     * let result = alibarray().first(data);
+     * let result = alibarray(data).first();
      */
   const first = () => {
     return arr.length > 0 ? arr[0] : undefined;
@@ -290,7 +290,7 @@ const alibarray = (arr) => {
      * @param {string} propName - name of prop to do compare on
      * @example 
      * // should return [{ color: 'blue', size: 44 }, { color: 'green', size: 12 }, { color: 'red', size: 18 }, { color: 'gold', size: 15 }, { color: 'black', size: 12 }] as these are the first found unique value of 'color' for all objects in passed array
-     * let result = alibarray().unique(data, 'color');
+     * let result = alibarray(data).unique('color');
      */
   const unique = (propName) => {
     return arr.filter((item, pos, self) => self.findIndex(v => v[propName] === item[propName]) === pos)
