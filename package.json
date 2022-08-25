@@ -1,7 +1,7 @@
 {
   "name": "alib-array",
-  "version": "1.6.0",
-  "description": "A set of JavaScript array helper functions: position, contains, match, exclude, move, swap, first, last, unique.",
+  "version": "1.7.0",
+  "description": "A set of JavaScript array helper functions: position, contains, match, exclude, find, update, replace, move, swap, first, last, unique.",
   "main": "index.js",
   "scripts": {
     "test": "mocha"
@@ -20,6 +20,9 @@
     "positon",
     "match",
     "exclude",
+    "find",
+    "update",
+    "replace",
     "count",
     "move",
     "insert",

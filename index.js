@@ -173,6 +173,60 @@ const alibarray = () => {
   const position = (arr, compareItem, compareMode) => engine(arr, compareItem, compareMode, 'position');
 
   /**
+     * returns first item in array containing an object with props and values matching that of passed compareItem - if nothing is found, null is returned 
+     * @param {array} arr - array for operation to be executed on
+     * @param {object} compareItem - item to compare
+     * @param {string} [compareMode="all"] - compare mode 'all' matches all props on passed object 'any' any props match, 'exact' - exact match
+     * @return {int}  - positon if array contains item, otherwise null 
+     * @example 
+     * // should return 1 as item is at index pos 1 in the array
+     * let result = alibarray().position(data, { color: 'green', size: 12 });
+     */
+  const find = (arr, compareItem, compareMode) => {
+    let position = engine(arr, compareItem, compareMode, 'position');
+    return position !== null ? arr[position] : null;
+  };
+
+  /**
+     * update first item in array containing an object with props and values matching that of passed compareItem with passed in update item, mutates the array passed to it
+     * @param {array} arr - array for operation to be executed on
+     * @param {object} compareItem - item to compare
+     * @param {object} updateItem - item to update found item with
+     * @param {string} [compareMode="all"] - compare mode 'all' matches all props on passed object 'any' any props match, 'exact' - exact match
+     * @return {int}  - positon if array contains item, otherwise null 
+     * @example 
+     * // should update first item in array found using { color: 'green' } that is { color: 'green', size: 12 } to { color: 'green', size: 12, name: 'paris' }
+     * let result = alibarray().update(data, { color: 'green' }, { name: 'paris' });
+     */
+  const update = (arr, compareItem, updateItem, compareMode) => {
+    let position = engine(arr, compareItem, compareMode, 'position');
+    if (position !== null) {
+      arr[position] = {
+        ...arr[position],
+        ...updateItem
+      };
+    }
+  };
+
+  /**
+     * replace first item in array containing an object with props and values matching that of passed compareItem with passed in update item, mutates the array passed to it
+     * @param {array} arr - array for operation to be executed on
+     * @param {object} compareItem - item to compare
+     * @param {object} replaceItem - item to replace found item with
+     * @param {string} [compareMode="all"] - compare mode 'all' matches all props on passed object 'any' any props match, 'exact' - exact match
+     * @return {int}  - positon if array contains item, otherwise null 
+     * @example 
+     * // should replace first item in array found using { color: 'green' } that is { color: 'green', size: 12 } to { name: 'paris' }
+     * let result = alibarray().replace(data, { color: 'green' }, { name: 'paris' });
+     */
+  const replace = (arr, compareItem, replaceItem, compareMode) => {
+    let position = engine(arr, compareItem, compareMode, 'position');
+    if (position !== null) {
+      arr[position] = replaceItem;
+    }
+  };
+
+  /**
      * checks if an array contains an object with props and values matching that of passed compareItem 
      * @param {array} arr - array for operation to be executed on
      * @param {object} compareItem - item to compare
@@ -185,7 +239,7 @@ const alibarray = () => {
   const contains = (arr, compareItem, compareMode) => position(arr, compareItem, compareMode) !== null;
 
   /**
-     * returns array of items in array containing an object with props and values matching that of passed compareItem - if nothing is found, null is returned 
+     * returns array of items from array containing an object with props and values matching that of passed compareItem - if nothing is found, null is returned 
      * @param {array} arr - array for operation to be executed on
      * @param {object} compareItem - item to compare
      * @param {string} [compareMode="all"] - compare mode 'all' matches all props on passed object 'any' any props match, 'exact' - exact match
@@ -197,7 +251,7 @@ const alibarray = () => {
   const match = (arr, compareItem, compareMode) => engine(arr, compareItem, compareMode, 'match');
 
   /**
-     * returns array of items in array containing an object with props and values matching that of passed compareItem - if nothing is found, null is returned 
+     * returns array of items from array containing an object with props and values matching that of passed compareItem - if nothing is found, null is returned 
      * @param {array} arr - array for operation to be executed on
      * @param {object} compareItem - item to compare
      * @param {string} [compareMode="all"] - compare mode 'all' matches all props on passed object 'any' any props match, 'exact' - exact match
@@ -206,7 +260,7 @@ const alibarray = () => {
      * // should return [  { color: 'blue', size: 44 }, { color: 'blue', size: 9 }, { color: 'blue', size: 4 }, { color: 'blue', size: 12 }] as item match object with passed props
      * let result = alibarray().match(data, { color: 'blue' });
      */
-   const exclude = (arr, compareItem, compareMode) => engine(arr, compareItem, compareMode, 'exclude');  
+  const exclude = (arr, compareItem, compareMode) => engine(arr, compareItem, compareMode, 'exclude');
 
   /**
    * returns number of items in array containing an object with props and values matching that of passed compareItem 
@@ -262,6 +316,9 @@ const alibarray = () => {
     position,
     match,
     exclude,
+    find,
+    update,
+    replace,
     count,
     last,
     first,

@@ -1,6 +1,6 @@
 # alib-array
 
-A set of JavaScript array helper functions: position, contains, count, move, swap.
+A set of JavaScript array helper functions:
 * position - returns index position of first item in array containing an object with props and values matching that of passed object.
 * contains - Check if array contains object with props and values matching that of passed object.
 * count - returns number of items in array containing an object with props and values matching that of passed object.
@@ -9,6 +9,12 @@ A set of JavaScript array helper functions: position, contains, count, move, swa
 * first - get first item of array, returns undefined if array empty.
 * last - get last item of array, returns undefined if array empty.
 * unique - returns items where prop of propName has a unique value.
+* match - returns array of items in array containing an object with props and values matching that of passed object.
+* find - returns first item in array containing an object with props and values matching that of passed object.
+* exclude - returns array of items in array containing an object with props and values not matching that of passed object.
+* update - updates first item in array containing an object with props and values matching that of passed object.
+* replace - replaces first item in array containing an object with props and values matching that of passed object.
+* insert - inserts an item into an array at passed index, if index is longer than array item is added to end of array.
 
 ## Install
 
@@ -159,6 +165,37 @@ var result = alibarray().match(data, { color: 'green', size: 12, details : {shap
 
 ```
 
+find - returns first item in array containing an object with props and values matching that of passed compareObject - if nothing is found, null is returned :
+
+```js
+
+var data = [
+    { color: 'blue', size: 44 },
+    { color: 'green', size: 12 },
+    { color: 'red', size: 18 },
+    { color: 'blue', size: 9 },
+    { color: 'blue', size: 4 },
+    { color: 'blue', size: 12 },
+    { color: 'black', size: 12 },
+];
+
+var result = alibarray().find(data, { color: 'green', size: 12 });
+//=> { color: 'green', size: 12 }
+
+var result = alibarray().find(data, { color: 'green' });
+//=> { color: 'green', size: 12 }
+
+//compareMode can be passed defaults to all - compare mode 'all' matches all props on passed object 'any' any props match from passed object, 'exact' - exact match 
+
+var result = alibarray().find(data, { color: 'green' }, 'exact');
+//=> null - an exact match of { color: 'green' } not found in the array
+
+var result = alibarray().find(data, { color: 'green', size: 12, details : {shape: 'round', name: 'circle'} });
+//=> null - return null as item is not in the array
+
+```
+
+
 exclude - returns array of items in array containing an object with props and values not matching that of passed compareItem:
 
 ```js
@@ -241,6 +278,42 @@ var result = alibarray().last(data);
 
 console.log(result);
 //=> 10
+
+```
+
+update - updates first item in array containing an object with props and values matching that of passed compareObject with update item, mutates array passed to it
+```js
+
+var data = [
+    { color: 'blue', size: 44 },
+    { color: 'green', size: 12 },
+    { color: 'red', size: 18 },
+    { color: 'blue', size: 9 },
+    { color: 'blue', size: 4 },
+    { color: 'blue', size: 12 },
+    { color: 'black', size: 12 },
+];
+
+var result = alibarray().update(data, { color: 'green' }, { name: 'paris' });
+//=> [ { color: 'blue', size: 44 }, { color: 'green', size: 12, name: 'paris' }, { color: 'red', size: 18 }, { color: 'blue', size: 9 }, { color: 'blue', size: 4 }, { color: 'blue', size: 12 }, { color: 'black', size: 12 } ]
+
+```
+
+replace - replaces first item in array containing an object with props and values matching that of passed compareObject with replace item, mutates array passed to it
+```js
+
+var data = [
+    { color: 'blue', size: 44 },
+    { color: 'green', size: 12 },
+    { color: 'red', size: 18 },
+    { color: 'blue', size: 9 },
+    { color: 'blue', size: 4 },
+    { color: 'blue', size: 12 },
+    { color: 'black', size: 12 },
+];
+
+var result = alibarray().update(data, { color: 'green' }, { name: 'paris' });
+//=> [ { color: 'blue', size: 44 }, { name: 'paris' }, { color: 'red', size: 18 }, { color: 'blue', size: 9 }, { color: 'blue', size: 4 }, { color: 'blue', size: 12 }, { color: 'black', size: 12 } ]
 
 ```
 

@@ -75,6 +75,44 @@ var data6t4 = [
   { color: 'black', size: 12, postIds: [9, 10, 15, 18] },
 ];
 
+var dataUpdate = [
+  { color: 'blue', size: 44 },
+  { color: 'green', size: 12 },
+  { color: 'red', size: 18 },
+  { color: 'blue', size: 9 },
+  { color: 'blue', size: 4 },
+  { color: 'blue', size: 12 },
+  { color: 'black', size: 12 },
+];
+var dataUpdatet1 = [
+  { color: 'blue', size: 44 },
+  { color: 'green', name: 'paris', size: 12 },
+  { color: 'red', size: 18 },
+  { color: 'blue', size: 9 },
+  { color: 'blue', size: 4 },
+  { color: 'blue', size: 12 },
+  { color: 'black', size: 12 },
+];
+
+var dataReplace = [
+  { color: 'blue', size: 44 },
+  { color: 'green', size: 12 },
+  { color: 'red', size: 18 },
+  { color: 'blue', size: 9 },
+  { color: 'blue', size: 4 },
+  { color: 'blue', size: 12 },
+  { color: 'black', size: 12 },
+];
+var dataReplacet1 = [
+  { color: 'blue', size: 44 },
+  { name: 'paris' },
+  { color: 'red', size: 18 },
+  { color: 'blue', size: 9 },
+  { color: 'blue', size: 4 },
+  { color: 'blue', size: 12 },
+  { color: 'black', size: 12 },
+];
+
 describe('alibarray', function () {
   describe('#contains()', function () {
     it('should return true as item is contained in the array', function () {
@@ -193,6 +231,59 @@ describe('alibarray', function () {
     });
   });
 
+
+  describe('#find()', function () {
+    it('should return item at index pos 1 in the array', function () {
+      var result = alibarray().find(data, { color: 'green', size: 12 });
+      assert.deepEqual(result, { color: 'green', size: 12 });
+    });
+
+    it('should return item at index pos 1 in the array', function () {
+      var result = alibarray().find(data, { color: 'green' });
+      assert.deepEqual(result, { color: 'green', size: 12 });
+    });
+
+    it('should return 0 as item is at index pos 0 in the array', function () {
+      var result = alibarray().find(data, {});
+      assert.deepEqual(result, { color: 'blue', size: 44 });
+    });
+
+    it('should return null as item is not contained in the array', function () {
+      var result = alibarray().find(data, { color: 'green', size: 12, details: { shape: 'round', name: 'circle' } });
+      assert.equal(result, null);
+    });
+
+    it('should return null as item is not contained in the array', function () {
+      var result = alibarray().find(data, { color: 'green', size: 25 });
+      assert.equal(result, null);
+    });
+
+    it('should return null as item is not contained in the array', function () {
+      var result = alibarray().find(data, { color: 'green', size: 25, type: 'jumper' });
+      assert.equal(result, null);
+    });
+
+    it('should return null as item is not contained in the array', function () {
+      var result = alibarray().find(data, { mega: true });
+      assert.equal(result, null);
+    });
+
+    it('should return null as primative is not contained in the array', function () {
+      var result = alibarray().find(data, 7);
+      assert.equal(result, null);
+    });
+
+    it('should return 7 as 7 in the array', function () {
+      var result = alibarray().find(data2, 7);
+      assert.equal(result, 7);
+    });
+
+    it('should return null as primative is not contained in the array', function () {
+      var result = alibarray().find(data2, 41);
+      assert.equal(result, null);
+    });
+  });  
+
   describe('#count()', function () {
     it('should return 1 as 1 item matches in the array', function () {
       var result = alibarray().count(data, { color: 'green', size: 12 });
@@ -307,4 +398,19 @@ describe('alibarray', function () {
       assert.deepEqual(result, data6t4);
     });
   });  
+
+  describe('#update()', function () {
+    it('should update found item with additional props', function () {
+      alibarray().update(dataUpdate, { color: 'green' }, { name: 'paris'});
+      assert.deepEqual(dataUpdate, dataUpdatet1);
+    });
+  }); 
+
+  describe('#replace()', function () {
+    it('should replace found item with passed object', function () {
+      alibarray().replace(dataReplace, { color: 'green' }, { name: 'paris'});
+      assert.deepEqual(dataReplace, dataReplacet1);
+    });
+  });   
+
 });
