@@ -263,13 +263,14 @@ const alibarray = (arr) => {
      * @return {int}  - positon if array contains item, otherwise null 
      * @example 
      * // should return [{ color: 'blue', size: 44 }, { color: 'blue', size: 9 }, { color: 'blue', size: 4 }, { color: 'blue', size: 12 }] as item match object with passed props
-     * let result = alibarray(data).match({ color: 'blue' });
+     * let result = alibarray(data).exclude({ color: 'blue' });
      */
   const exclude = (compareItem, compareMode) => engine(compareItem, compareMode, 'exclude');
 
   /**
    * returns number of items in array containing an object with props and values matching that of passed compareItem
    * @param {object} compareItem - item to compare
+   * @param {string} [compareMode="all"] - compare mode 'all' matches all props on passed object 'any' any props match, 'exact' - exact match
    * @return {int}  - number of matching items 
    * @example 
    * // should return 3 as there are 3 items matching compareItem in the array
