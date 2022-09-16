@@ -56,50 +56,36 @@ const alibarray = (arr) => {
         }
 
         let exclude = false;
-        if ((nCompareMode === 'all' && matches === keys.length) || (nCompareMode === 'any' && matches > 0)) {
-          if (mode === 'match') {
+        if ((nCompareMode === 'all' && matches === keys.length) || (nCompareMode === 'any' && matches > 0) || (nCompareMode === 'exact' && matches === keys.length)) {
+          let sucMatch = true;
+          if (nCompareMode === 'exact') {
+            //now check prop count
+            let pcount = 0;
+            for (let prop in arr[i]) {
+              if (arr[i].hasOwnProperty(prop)) {
+                pcount++;
+              }
+            }
+            sucMatch = pcount === keys.length;
+          }
+          
+          if (mode === 'match' && sucMatch) {
             arrMatches.push(arr[i]);
           }
-          if (mode === 'exclude') {
+          if (mode === 'exclude' && sucMatch) {
             exclude = true;
           }
-          if (mode === 'position') {
+          if (mode === 'position' && sucMatch) {
             pos = i;
             break;
           }
-          if (mode === 'count') {
+          if (mode === 'count' && sucMatch) {
             countMatches++;
-          }
-        }
-        if (nCompareMode === 'exact' && matches === keys.length) {
-          //now check prop count
-          let pcount = 0;
-          for (let prop in arr[i]) {
-            if (arr[i].hasOwnProperty(prop)) {
-              pcount++;
-            }
-          }
-
-          if (pcount === keys.length) {
-            if (mode === 'match') {
-              arrMatches.push(arr[i]);
-            }
-            if (mode === 'exclude') {
-              exclude = true;
-            }
-            if (mode === 'position') {
-              pos = i;
-              break;
-            }
-            if (mode === 'count') {
-              countMatches++;
-            }
           }
         }
         if (mode === 'exclude' && exclude === false) {
           arrMatches.push(arr[i]);
         }
-
       }
     }
     else {
@@ -327,6 +313,5 @@ const alibarray = (arr) => {
     unique
   };
 };
-
 
 module.exports = alibarray;
